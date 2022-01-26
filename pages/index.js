@@ -2,6 +2,7 @@
 import appConfig from '../config.json';
 import React from 'react';
 import {useRouter} from 'next/router';
+import { VscGithubInverted }from 'react-icons/vsc'
 
 
 
@@ -72,8 +73,9 @@ export default function PaginaInicial() {
               infosDoEvento.preventDefault();
              //trocar de pagina modo roots
             //window.location.href ='/chat'
-            if (username.length > 2){
-              roteamento.push('chat');
+            if (username.length > 0){
+              roteamento.push(`chat?nome=${username}`);
+
             }
             else{
               console.log("Error")
@@ -109,6 +111,7 @@ export default function PaginaInicial() {
             <TextField
               value={username}
               placeholder=" GitHub Username"
+              
               onChange={function Handler(event){
               //Valores
               const valor = event.target.value

@@ -1,15 +1,14 @@
 ﻿import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import React from 'react';
 import appConfig from '../config.json';
+import { useRouter } from 'next/router'
 
 
-
-export default function ChatPage(props) {
+export default function ChatPage() {
     const [mensagem, setMensagem] = React.useState('');
     const [listaDeMensagens, setListaDeMensagens] = React.useState([]);
-
-}
-    
+    const {query}  = useRouter()
+    console.log(query.nome)
     /*
     // Usuário
     - Usuário digita no campo textarea
@@ -24,7 +23,7 @@ export default function ChatPage(props) {
     function handleNovaMensagem(novaMensagem) {
         const mensagem = {
             id: listaDeMensagens.length + 1,
-            de: 'vanessametonini',
+            de: `${query.nome}`,
             texto: novaMensagem,
         };
 
@@ -54,7 +53,7 @@ export default function ChatPage(props) {
                     borderRadius: '5px',
                     backgroundColor: appConfig.theme.colors.neutrals[700],
                     height: '85%',
-                    maxWidth: '80%',
+                    maxWidth: '75%',
                     maxHeight: '95vh',
                     padding: '25px',
                 }}
@@ -72,7 +71,7 @@ export default function ChatPage(props) {
                         padding: '16px',
                     }}
                 >
-                    <MessageList mensagens={listaDeMensagens} />
+                    <MessageList mensagens={listaDeMensagens} username= {query.nome}/>
                     {/* {listaDeMensagens.map((mensagemAtual) => {
                         return (
                             <li key={mensagemAtual.id}>
@@ -138,6 +137,7 @@ function Header() {
 }
 
 function MessageList(props) {
+    const username = props.username
     console.log(props);
     return (
         <Box
@@ -172,13 +172,13 @@ function MessageList(props) {
                         >
                             <Image
                                 styleSheet={{
-                                    width: '20px',
-                                    height: '20px',
+                                    width: '32px',
+                                    height: '32px',
                                     borderRadius: '50%',
-                                    display: 'inline-block',
-                                    marginRight: '8px',
+                                    //display: 'inline-block',
+                                    marginRight: '12px',
                                 }}
-                                src={`https://github.com/JeffersonDallalibera.png`}
+                                src={`https://github.com/${username}.png`}
                             />
                             <Text tag="strong">
                                 {mensagem.de}
