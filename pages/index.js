@@ -36,7 +36,7 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   //const username = 'JeffersonDallalibera';
-  const [username, setUsername] = React.useState('JeffersonDallalibera')
+  const [username, setUsername] = React.useState('')
   const roteamento = useRouter();
   
   return (
@@ -68,11 +68,17 @@ export default function PaginaInicial() {
           <Box
             as="form"
             onSubmit={function(infosDoEvento) {
+
               infosDoEvento.preventDefault();
-              console.log("Alguem submeteu o  formulario")  
              //trocar de pagina modo roots
             //window.location.href ='/chat'
-            roteamento.push('chat');
+            if (username.length > 2){
+              roteamento.push('chat');
+            }
+            else{
+              console.log("Error")
+            }
+            
             
             }}
             styleSheet={{
@@ -102,8 +108,8 @@ export default function PaginaInicial() {
 
             <TextField
               value={username}
+              placeholder=" GitHub Username"
               onChange={function Handler(event){
-              console.log("usuario digitou", event.target.value)
               //Valores
               const valor = event.target.value
               //Trocar valor da variavel
@@ -175,4 +181,8 @@ export default function PaginaInicial() {
       </Box>
     </>
   );
+}
+
+function validateuser(){
+
 }
